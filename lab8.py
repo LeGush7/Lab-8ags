@@ -6,7 +6,11 @@ template = cv2.imread('variant-5.jpg', 0)
 noise = np.random.normal(0, 1, template.shape).astype(np.uint8)
 noise_template = cv2.add(template, noise)
 
-# загрузка видео и метода ORB, видео не смог загрузить, т.к. его размер слишком большой
+# сохранение зашумлённого фото
+cv2.imwrite('noisy_template.jpg', noise_template)
+
+# загрузка видео и метода ORB
+# ссылка на видео: https://drive.google.com/file/d/1eypg1gY-2eDp0Qm05k3neMEJ6P8O25TW/view?usp=sharing
 orb = cv2.ORB_create(nfeatures=1000)
 kp1, des1 = orb.detectAndCompute(noise_template, None)
 capt = cv2.VideoCapture('lab8.mp4')
@@ -59,5 +63,3 @@ while True:
 
 capt.release()
 cv2.destroyAllWindows()
-# код получился сильноусложнённым, но только в таком виде он работает
-# более менее нормально
